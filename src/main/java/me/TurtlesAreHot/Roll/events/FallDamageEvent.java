@@ -21,11 +21,10 @@ public class FallDamageEvent implements Listener {
             BendingPlayer bPlayer = BendingPlayer.getBendingPlayer(player);
             Ability roll = CoreAbility.getAbility(Roll.class);
             if (bPlayer.hasElement(chi) && e.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                if(Roll.getCd(player) == null || (System.currentTimeMillis() - Roll.getCd(player) >= roll.getCooldown())) {
-                    Roll.removeCooldown(player);
+                if(!(bPlayer.isOnCooldown("Roll"))) {
                     e.setDamage(0.0D);
                     e.setCancelled(true);
-                    Roll.addCooldown(player);
+                    bPlayer.addCooldown("Roll", roll.getCooldown());
                     player.sendMessage(ChatColor.GOLD + "You were about to take fall damage but you rolled!");
                 } else {
                     player.sendMessage(ChatColor.GOLD + "You tried to roll to prevent fall damage but you failed!");

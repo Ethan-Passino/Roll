@@ -9,11 +9,8 @@ import me.TurtlesAreHot.Roll.events.FallDamageEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 
 public class Roll extends ChiAbility implements PassiveAbility, AddonAbility {
-    public static final HashMap<Player, Long> cooldowns = new HashMap<>();
-
     public Long cooldown;
 
     public Roll(Player p) {
@@ -83,17 +80,5 @@ public class Roll extends ChiAbility implements PassiveAbility, AddonAbility {
 
     public boolean isProgressable() {
         return false;
-    }
-
-    public static void addCooldown(Player p) {
-        cooldowns.put(p, System.currentTimeMillis());
-    }
-
-    public static void removeCooldown(Player p) {
-        cooldowns.remove(p);
-    }
-
-    public static Long getCd(Player p) {
-        return cooldowns.get(p);
     }
 }
